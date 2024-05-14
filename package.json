@@ -1,0 +1,22 @@
+{
+  "name": "calculatortests",
+  "version": "1.0.0",
+  "description": "This is a test suite for the Google Calculator in the search reults. This is a test",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/laco3233/googleCalculatorTest.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/laco3233/googleCalculatorTest/issues"
+  },
+  "homepage": "https://github.com/laco3233/googleCalculatorTest#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.44.0",
+    "@types/node": "^20.12.12"
+  }
+}
