@@ -4,10 +4,10 @@ const { test, expect } = require('@playwright/test');
 const { googlePage } = require('./support/pageobjectmodel/pages/google.page');
 
 //Data Generation
-const num = [1,2,3,4,5,6,7,8,9,0];
+const num = [1,2,3,4,5,6,7,8,9];
 
-let a = Math.floor(Math.random() * num.length);
-let b = Math.floor(Math.random() * num.length);
+let a = Math.ceil(Math.random() * num.length);
+let b = Math.ceil(Math.random() * num.length);
 
 let makeDifferent = () => {
     if (b === a) {
@@ -19,6 +19,8 @@ makeDifferent();
 let c = parseFloat(String(`${a}.${b}`));
 let d = parseFloat(String(`${b}.${a}`));
 
+let regex = new RegExp(`^${c}$`);
+
 //Tests to verify addition functionality
 
 for (const n of num) {
@@ -28,7 +30,7 @@ for (const n of num) {
         await google.searchFor("calculator");
         console.log(n);
         await page.getByRole('button', { name: `${n}`, exact: true }).click();
-        await page.getByLabel('multiply').click();
+        await page.getByLabel('divide').click();
         await page.getByRole('button', { name: `${n}`, exact: true }).click();
         await page.getByLabel('equals').click();
         await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText(`${n / n}`);
@@ -40,10 +42,10 @@ test('should divide non matching numbers', async ({ page }) => {
     await google.goto();
     await google.searchFor("calculator");
     await page.getByRole('button', { name: `${a}`, exact: true }).click();
-    await page.getByLabel('multiply').click();
+    await page.getByLabel('divide').click();
     await page.getByRole('button', { name:`${b}`, exact: true }).click();
     await page.getByLabel('equals').click();
-    await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText(`${a / b}`);
+    await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText(`${parseFloat((a / b).toFixed(8))}`);
 });
 
 test('should divide numbers with decimals', async ({ page }) => {
@@ -53,11 +55,11 @@ test('should divide numbers with decimals', async ({ page }) => {
     await page.getByRole('button', { name: `${a}`, exact: true }).click();
     await page.getByLabel('point').click();
     await page.getByRole('button', { name:`${b}`, exact: true }).click();
-    await page.getByLabel('multiply').click();    
+    await page.getByLabel('divide').click();    
     await page.getByRole('button', { name:`${b}`, exact: true }).click();
     await page.getByLabel('point').click();
     await page.getByRole('button', { name: `${a}`, exact: true }).click();
     await page.getByLabel('equals').click();
     console.log(c, d);
-    await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText(`${parseFloat((c / d).toFixed(2))}`);
+    await expect(page.locator('xpath=//*[@id="cwos"]').first()).toContainText(`\/^${parseFloat((c / d).toFixed(8))}`);
 });
