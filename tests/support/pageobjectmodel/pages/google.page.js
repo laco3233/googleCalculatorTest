@@ -10,19 +10,20 @@ exports.googlePage = class googlePage {
 
   constructor(page) {
     this.page = page;
+    //Locators
+    this.searchInput = page.locator('xpath=//*[@id="APjFqb"]');
+    this.searchButton = page.getByLabel('Google Search').first();
   }
 
   async goto() {
     await this.page.goto('https://google.com/');
   }
 
-  //Locators
-//   searchInput = this.page.getByRole('textbox', {name: 'Search'}).fill('calculator');
-//   searchButton = this.page.getByText('Google Search');
+  
 
 //Actions
-//   async searchFor() {
-//     await this.searchInput;
-//     await this.searchButton.click();
-//   }
+  async searchFor(searchQuery) {
+    await this.searchInput.fill(searchQuery);
+    await this.searchButton.click();
+  }
 }
