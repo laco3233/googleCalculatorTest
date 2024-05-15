@@ -22,40 +22,42 @@ let d = parseFloat(String(`${b}.${a}`));
 //Tests to verify addition functionality
 
 for (const n of num) {
-    test(`should add ${n} to ${n}`, async ({ page }) => {
+    test(`should multiply ${n} with ${n}`, async ({ page }) => {
         const google = new googlePage(page);
         await google.goto();
         await google.searchFor("calculator");
+        console.log(n);
         await page.getByRole('button', { name: `${n}`, exact: true }).click();
-        await page.getByText('+', { exact: true }).click();
+        await page.getByLabel('multiply').click();
         await page.getByRole('button', { name: `${n}`, exact: true }).click();
         await page.getByLabel('equals').click();
-        await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText(`${n + n}`);
+        await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText(`${n * n}`);
     });
 }
 
-test('should add non matching numbers', async ({ page }) => {
+test('should mulitply non matching numbers', async ({ page }) => {
     const google = new googlePage(page);
     await google.goto();
     await google.searchFor("calculator");
     await page.getByRole('button', { name: `${a}`, exact: true }).click();
-    await page.getByText('+').click();
+    await page.getByLabel('multiply').click();
     await page.getByRole('button', { name:`${b}`, exact: true }).click();
     await page.getByLabel('equals').click();
-    await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText(`${a + b}`);
+    await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText(`${a * b}`);
 });
 
-test('should add numbers with decimals', async ({ page }) => {
+test('should multiply numbers with decimals', async ({ page }) => {
     const google = new googlePage(page);
     await google.goto();
     await google.searchFor("calculator");
     await page.getByRole('button', { name: `${a}`, exact: true }).click();
     await page.getByLabel('point').click();
     await page.getByRole('button', { name:`${b}`, exact: true }).click();
-    await page.getByText('+').click();    
+    await page.getByLabel('multiply').click();    
     await page.getByRole('button', { name:`${b}`, exact: true }).click();
     await page.getByLabel('point').click();
     await page.getByRole('button', { name: `${a}`, exact: true }).click();
     await page.getByLabel('equals').click();
-    await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText(`${c + d}`);
+    console.log(c, d);
+    await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText(`${parseFloat((c * d).toFixed(2))}`);
 });

@@ -21,11 +21,6 @@ let d = parseFloat(String(`${b}.${a}`));
 
 //Tests to verify addition functionality
 
-test.afterEach(async ({ page }) => {
-    await page.getByText('AC', { exact: true }).click();
-    await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('0'); 
-})
-
 for (const n of num) {
     test(`should subtract ${n} from ${n}`, async ({ page }) => {
         const google = new googlePage(page);
