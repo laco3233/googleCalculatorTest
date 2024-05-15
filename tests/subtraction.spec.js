@@ -27,37 +27,37 @@ test.afterEach(async ({ page }) => {
 })
 
 for (const n of num) {
-    test(`should add ${n} to ${n}`, async ({ page }) => {
+    test(`should subtract ${n} from ${n}`, async ({ page }) => {
         const google = new googlePage(page);
         await google.goto();
         await google.searchFor("calculator");
         await page.getByRole('button', { name: `${n}`, exact: true }).click();
-        await page.getByText('-', { exact: true }).click();
+        await page.getByLabel('minus').click();
         await page.getByRole('button', { name: `${n}`, exact: true }).click();
         await page.getByLabel('equals').click();
         await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText(`${n - n}`);
     });
 }
 
-test('should add non matching numbers', async ({ page }) => {
+test('should hsould subtract non matching numbers', async ({ page }) => {
     const google = new googlePage(page);
     await google.goto();
     await google.searchFor("calculator");
     await page.getByRole('button', { name: `${a}`, exact: true }).click();
-    await page.getByText('-').click();
+    await page.getByLabel('minus').click();
     await page.getByRole('button', { name:`${b}`, exact: true }).click();
     await page.getByLabel('equals').click();
     await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText(`${a - b}`);
 });
 
-test('should add numbers with decimals', async ({ page }) => {
+test('should subtract numbers with decimals', async ({ page }) => {
     const google = new googlePage(page);
     await google.goto();
     await google.searchFor("calculator");
     await page.getByRole('button', { name: `${a}`, exact: true }).click();
     await page.getByLabel('point').click();
     await page.getByRole('button', { name:`${b}`, exact: true }).click();
-    await page.getByText('-').click();    
+    await page.getByLabel('minus').click();    
     await page.getByRole('button', { name:`${b}`, exact: true }).click();
     await page.getByLabel('point').click();
     await page.getByRole('button', { name: `${a}`, exact: true }).click();
