@@ -26,4 +26,5 @@ exports.googlePage = class googlePage {
     await this.searchInput.fill(searchQuery);
     await this.searchButton.click();
   }
+  
 }

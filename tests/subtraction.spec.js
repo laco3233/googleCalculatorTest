@@ -19,7 +19,7 @@ makeDifferent();
 let c = parseFloat(String(`${a}.${b}`));
 let d = parseFloat(String(`${b}.${a}`));
 
-//Tests to verify addition functionality
+//Tests to verify subtraction functionality
 
 for (const n of num) {
     test(`should subtract ${n} from ${n}`, async ({ page }) => {

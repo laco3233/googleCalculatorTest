@@ -19,10 +19,10 @@ makeDifferent();
 let c = parseFloat(String(`${a}.${b}`));
 let d = parseFloat(String(`${b}.${a}`));
 
-//Tests to verify addition functionality
+//Tests to verify multiplication functionality
 
 for (const n of num) {
-    test(`should multiply ${n} with ${n}`, async ({ page }) => {
+    test(`should multiply ${n} by ${n}`, async ({ page }) => {
         const google = new googlePage(page);
         await google.goto();
         await google.searchFor("calculator");
