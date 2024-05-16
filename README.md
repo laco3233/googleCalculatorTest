@@ -7,8 +7,9 @@ This is a test suite for the Google Calculator in the search reults.
 - Users are only using mouse inputs
 
 ### Dependencies
-- Playwright
+- Node.js
 - npm
+- Playwright
 - Javascript
 
 ### Functionality covered
