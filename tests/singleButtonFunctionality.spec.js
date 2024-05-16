@@ -71,10 +71,66 @@ test(`Should verify that - is displayed`, async ({ page }) => {
     await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('-');
 });
 
+test(`Should verify that = does nothing without any other inputs`, async ({ page }) => {
+    const google = new googlePage(page);
+    await google.goto();
+    await google.searchFor("calculator");
+    await page.getByLabel('equals').click();
+    await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('0');
+});
+
 test(`Should verify that + is displayed`, async ({ page }) => {
     const google = new googlePage(page);
     await google.goto();
     await google.searchFor("calculator");
     await page.getByLabel('plus').click();
     await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('0 +');
+});
+
+test(`Should verify that CE clears after pressing ÷ and displays 0`, async ({ page }) => {
+    const google = new googlePage(page);
+    await google.goto();
+    await google.searchFor("calculator");
+    await page.getByLabel('divide').click();
+    await page.getByLabel('clear entry').click();
+    await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('0');
+});
+
+test(`Should verify that CE clears after pressing × and displays 0`, async ({ page }) => {
+    const google = new googlePage(page);
+    await google.goto();
+    await google.searchFor("calculator");
+    await page.getByLabel('multiply').click();
+    await page.getByLabel('clear entry').click();
+    await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('0');
+});
+
+test(`Should verify that CE clears after pressing - and displays 0`, async ({ page }) => {
+    const google = new googlePage(page);
+    await google.goto();
+    await google.searchFor("calculator");
+    await page.getByLabel('minus').click();
+    await page.getByLabel('clear entry').click();
+    await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('0');
+});
+
+test(`Should verify that CE clears after pressing + and displays 0`, async ({ page }) => {
+    const google = new googlePage(page);
+    await google.goto();
+    await google.searchFor("calculator");
+    await page.getByLabel('plus').click();
+    await page.getByLabel('clear entry').click();
+    await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('0');
+});
+
+test('should verify that AC clears the answer', async ({ page }) => {
+    const google = new googlePage(page);
+    await google.goto();
+    await google.searchFor("calculator");
+    await page.getByRole('button', { name: '9', exact: true }).click();    
+    await page.getByLabel('plus').click();    
+    await page.getByRole('button', { name: '9', exact: true }).click();
+    await page.getByLabel('equals').click();    
+    await page.getByLabel('all clear').click();
+    await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('0');
 });
