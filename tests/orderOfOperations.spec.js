@@ -3,9 +3,6 @@
 const { test, expect } = require('@playwright/test');
 const { googlePage } = require('./support/pageobjectmodel/pages/google.page');
 
-//Data Generation
-const button = [1,2,3,4,5,6,7,8,9,];
-
 //Tests to verify order of operations functionality with starting operatrs
 
 
