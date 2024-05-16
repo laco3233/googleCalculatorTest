@@ -3,15 +3,15 @@
 
 This is a test suite for the Google Calculator in the search reults. This is a test
 
-###Assumptions
+### Assumptions
 -Users are only using mouse inputs
 
-###Dependencies
+### Dependencies
 -Playwright
 -npm
 -Javascript
 
-###Functionality covered
+### Functionality covered
 -Addition functionality (same numbers, different numbers, numbers with decimals)
 -Subtraction functionality (same numbers, different numbers, numbers with decimals)
 -Multiplication functionality (same numbers, different numbers, numbers with decimals)
