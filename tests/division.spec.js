@@ -28,12 +28,37 @@ for (const n of num) {
         const google = new googlePage(page);
         await google.goto();
         await google.searchFor("calculator");
-        console.log(n);
         await page.getByRole('button', { name: `${n}`, exact: true }).click();
         await page.getByLabel('divide').click();
         await page.getByRole('button', { name: `${n}`, exact: true }).click();
         await page.getByLabel('equals').click();
-        await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText(`${n / n}`);
+        await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('1');
+    });
+}
+
+for (const n of num) {
+    test(`should divide ${n} by 0`, async ({ page }) => {
+        const google = new googlePage(page);
+        await google.goto();
+        await google.searchFor("calculator");
+        await page.getByRole('button', { name: `${n}`, exact: true }).click();
+        await page.getByLabel('divide').click();
+        await page.getByRole('button', { name: `0`, exact: true }).click();
+        await page.getByLabel('equals').click();
+        await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('Infinity');
+    });
+}
+
+for (const n of num) {
+    test(`should divide 0 by ${n}`, async ({ page }) => {
+        const google = new googlePage(page);
+        await google.goto();
+        await google.searchFor("calculator");
+        await page.getByRole('button', { name: `0`, exact: true }).click();
+        await page.getByLabel('divide').click();
+        await page.getByRole('button', { name: `${n}`, exact: true }).click();        
+        await page.getByLabel('equals').click();
+        await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('0');
     });
 }
 
@@ -45,7 +70,7 @@ test('should divide non matching numbers', async ({ page }) => {
     await page.getByLabel('divide').click();
     await page.getByRole('button', { name:`${b}`, exact: true }).click();
     await page.getByLabel('equals').click();
-    await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText(`${parseFloat((a / b).toFixed(8))}`);
+    await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText(`${a / b}`);
 });
 
 test('should divide numbers with decimals', async ({ page }) => {
@@ -61,5 +86,5 @@ test('should divide numbers with decimals', async ({ page }) => {
     await page.getByRole('button', { name: `${a}`, exact: true }).click();
     await page.getByLabel('equals').click();
     console.log(c, d);
-    await expect(page.locator('xpath=//*[@id="cwos"]').first()).toContainText(`\/^${parseFloat((c / d).toFixed(8))}`);
+    await expect(page.locator('xpath=//*[@id="cwos"]').first()).toContainText(`${parseFloat((c / d).toFixed(2))}`);
 });
