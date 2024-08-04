@@ -57,6 +57,7 @@ for (const n of num) {
         await page.getByRole('button', { name: `${n}`, exact: true }).click();        
         await page.getByLabel('equals').click();
         await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('0');
+        await page.close();
     });
 }
 
@@ -69,4 +70,5 @@ test('should divide non matching numbers', async ({ page }) => {
     await page.getByRole('button', { name:`${b}`, exact: true }).click();
     await page.getByLabel('equals').click();
     await expect(page.locator('xpath=//*[@id="cwos"]').first()).toContainText(`${parseFloat(Math.abs(a / b).toFixed(11))}`);
+    await page.close();
 });

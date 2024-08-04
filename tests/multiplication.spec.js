@@ -26,12 +26,12 @@ for (const n of num) {
         const google = new googlePage(page);
         await google.goto();
         await google.searchFor("calculator");
-        console.log(n);
         await page.getByRole('button', { name: `${n}`, exact: true }).click();
         await page.getByLabel('multiply').click();
         await page.getByRole('button', { name: `${n}`, exact: true }).click();
         await page.getByLabel('equals').click();
         await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText(`${n * n}`);
+        await page.close();
     });
 }
 
@@ -44,4 +44,5 @@ test('should mulitply non matching numbers', async ({ page }) => {
     await page.getByRole('button', { name:`${b}`, exact: true }).click();
     await page.getByLabel('equals').click();
     await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText(`${a * b}`);
+    await page.close();
 });

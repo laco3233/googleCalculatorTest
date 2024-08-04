@@ -13,6 +13,7 @@ test('should verify that 0 is displayed upon landing on search results page', as
     await google.goto();
     await google.searchFor("calculator");
     await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('0');
+    await page.close();
 });
 
 for (const n of button) {
@@ -22,6 +23,7 @@ for (const n of button) {
         await google.searchFor("calculator");
         await page.getByRole('button', { name: `${n}`, exact: true }).click();
         await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText(`${n}`);
+        await page.close();
     });
 }
 
@@ -32,6 +34,7 @@ test(`Should verify that . is displayed`, async ({ page }) => {
     await google.searchFor("calculator");
     await page.getByLabel('point').click();
     await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('.');
+    await page.close();
 });
 
 for (const n of button) {
@@ -42,6 +45,7 @@ for (const n of button) {
         await page.getByRole('button', { name: `${n}`, exact: true }).click();
         await page.getByLabel('clear entry').click();
         await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('0');
+        await page.close();
     });
 }
 
@@ -52,6 +56,7 @@ test(`Should verify that ÷ is displayed`, async ({ page }) => {
     await google.searchFor("calculator");
     await page.getByLabel('divide').click();
     await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('0 ÷');
+    await page.close();
 });
 
 
@@ -61,6 +66,7 @@ test(`Should verify that × is displayed`, async ({ page }) => {
     await google.searchFor("calculator");
     await page.getByLabel('multiply').click();
     await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('0 ×');
+    await page.close();
 });
 
 test(`Should verify that - is displayed`, async ({ page }) => {
@@ -69,6 +75,7 @@ test(`Should verify that - is displayed`, async ({ page }) => {
     await google.searchFor("calculator");
     await page.getByLabel('minus').click();
     await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('-');
+    await page.close();
 });
 
 test(`Should verify that = does nothing without any other inputs`, async ({ page }) => {
@@ -77,6 +84,7 @@ test(`Should verify that = does nothing without any other inputs`, async ({ page
     await google.searchFor("calculator");
     await page.getByLabel('equals').click();
     await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('0');
+    await page.close();
 });
 
 test(`Should verify that + is displayed`, async ({ page }) => {
@@ -85,6 +93,7 @@ test(`Should verify that + is displayed`, async ({ page }) => {
     await google.searchFor("calculator");
     await page.getByLabel('plus').click();
     await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('0 +');
+    await page.close();
 });
 
 test(`Should verify that CE clears after pressing ÷ and displays 0`, async ({ page }) => {
@@ -94,6 +103,7 @@ test(`Should verify that CE clears after pressing ÷ and displays 0`, async ({ p
     await page.getByLabel('divide').click();
     await page.getByLabel('clear entry').click();
     await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('0');
+    await page.close();
 });
 
 test(`Should verify that CE clears after pressing × and displays 0`, async ({ page }) => {
@@ -103,6 +113,7 @@ test(`Should verify that CE clears after pressing × and displays 0`, async ({ p
     await page.getByLabel('multiply').click();
     await page.getByLabel('clear entry').click();
     await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('0');
+    await page.close();
 });
 
 test(`Should verify that CE clears after pressing - and displays 0`, async ({ page }) => {
@@ -112,6 +123,7 @@ test(`Should verify that CE clears after pressing - and displays 0`, async ({ pa
     await page.getByLabel('minus').click();
     await page.getByLabel('clear entry').click();
     await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('0');
+    await page.close();
 });
 
 test(`Should verify that CE clears after pressing + and displays 0`, async ({ page }) => {
@@ -121,6 +133,7 @@ test(`Should verify that CE clears after pressing + and displays 0`, async ({ pa
     await page.getByLabel('plus').click();
     await page.getByLabel('clear entry').click();
     await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('0');
+    await page.close();
 });
 
 test('should verify that AC clears the answer', async ({ page }) => {
@@ -133,4 +146,5 @@ test('should verify that AC clears the answer', async ({ page }) => {
     await page.getByLabel('equals').click();    
     await page.getByLabel('all clear').click();
     await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('0');
+    await page.close();
 });

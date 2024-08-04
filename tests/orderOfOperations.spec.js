@@ -21,6 +21,7 @@ test(`Should verify order of operations starting with ÷ followed`, async ({ pag
     await page.getByRole('button', { name: '2', exact: true }).click();
     await page.getByLabel('equals').click();
     await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText(`${8/4+5-3*2}`);
+    await page.close();
 });
 
 test(`Should verify order of operations starting with × followed`, async ({ page }) => {
@@ -38,6 +39,7 @@ test(`Should verify order of operations starting with × followed`, async ({ pag
     await page.getByRole('button', { name: '2', exact: true }).click();
     await page.getByLabel('equals').click();
     await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText(`${6*4/3-3+2}`);
+    await page.close();
 });
 
 test(`Should verify order of operations starting with - followed`, async ({ page }) => {
@@ -55,6 +57,7 @@ test(`Should verify order of operations starting with - followed`, async ({ page
     await page.getByRole('button', { name: '2', exact: true }).click();
     await page.getByLabel('equals').click();
     await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText(`${9-4*3+6/2}`);
+    await page.close();
 });
 
 test(`Should verify order of operations starting with + followed`, async ({ page }) => {
@@ -72,6 +75,7 @@ test(`Should verify order of operations starting with + followed`, async ({ page
     await page.getByRole('button', { name: '2', exact: true }).click();
     await page.getByLabel('equals').click();
     await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText(`${9+3*3-6/2}`);
+    await page.close();
 });
 
 
