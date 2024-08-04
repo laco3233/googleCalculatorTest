@@ -4,7 +4,7 @@ const { test, expect } = require('@playwright/test');
 const { googlePage } = require('./support/pageobjectmodel/pages/google.page');
 
 //Data Generation
-const button = [1,2,3,4,5,6,7,8,9,];
+const button = [1,2,3,4,5,6,7,8,9];
 
 //Tests to verify single button use functionality
 
@@ -38,7 +38,7 @@ test(`Should verify that . is displayed`, async ({ page }) => {
 });
 
 for (const n of button) {
-    test(`Should verify that CE clears number $${n}`, async ({ page }) => {
+    test(`Should verify that CE clears number ${n}`, async ({ page }) => {
         const google = new googlePage(page);
         await google.goto();
         await google.searchFor("calculator");
