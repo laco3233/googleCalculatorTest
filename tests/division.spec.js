@@ -70,19 +70,3 @@ test('should divide non matching numbers', async ({ page }) => {
     await page.getByLabel('equals').click();
     await expect(page.locator('xpath=//*[@id="cwos"]').first()).toContainText(`${parseFloat(Math.abs(a / b).toFixed(11))}`);
 });
-
-test.skip('skipping should divide numbers with decimals', async ({ page }) => {
-    const google = new googlePage(page);
-    await google.goto();
-    await google.searchFor("calculator");
-    await page.getByRole('button', { name: `${a}`, exact: true }).click();
-    await page.getByLabel('point').click();
-    await page.getByRole('button', { name:`${b}`, exact: true }).click();
-    await page.getByLabel('divide').click();    
-    await page.getByRole('button', { name:`${b}`, exact: true }).click();
-    await page.getByLabel('point').click();
-    await page.getByRole('button', { name: `${a}`, exact: true }).click();
-    await page.getByLabel('equals').click();
-    console.log(c, d);
-    //await expect(page.locator('xpath=//*[@id="cwos"]').first()).toContainText(`${parseFloat(Math.round(c / d).toFixed(11))}`);
-});
