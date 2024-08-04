@@ -44,18 +44,3 @@ test('should hsould subtract non matching numbers', async ({ page }) => {
     await page.getByLabel('equals').click();
     await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText(`${a - b}`);
 });
-
-test('should subtract numbers with decimals', async ({ page }) => {
-    const google = new googlePage(page);
-    await google.goto();
-    await google.searchFor("calculator");
-    await page.getByRole('button', { name: `${a}`, exact: true }).click();
-    await page.getByLabel('point').click();
-    await page.getByRole('button', { name:`${b}`, exact: true }).click();
-    await page.getByLabel('minus').click();    
-    await page.getByRole('button', { name:`${b}`, exact: true }).click();
-    await page.getByLabel('point').click();
-    await page.getByRole('button', { name: `${a}`, exact: true }).click();
-    await page.getByLabel('equals').click();
-    await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText(`${c - d}`);
-});

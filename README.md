@@ -13,10 +13,10 @@ This is a test suite for the Google Calculator in the search reults.
 - Javascript
 
 ### Functionality covered
-- Addition functionality (same numbers, different numbers, numbers with decimals)
-- Subtraction functionality (same numbers, different numbers, numbers with decimals)
-- Multiplication functionality (same numbers, different numbers, numbers with decimals)
-- Division functionality (same numbers, different numbers, numbers with decimals)
+- Addition functionality (same numbers, different numbers)
+- Subtraction functionality (same numbers, different numbers)
+- Multiplication functionality (same numbers, different numbers)
+- Division functionality (same numbers, different numbers)
 - Order of Operations (Addition, Subtraction, Multiplication, Division as starting operators)
 - Landing on search results page and single button presses
-- Above scenarios tested against three browsers (Chrome, Firefox, Edge)
+- Above scenarios tested against three browsers (Chrome, Firefox, Safari)

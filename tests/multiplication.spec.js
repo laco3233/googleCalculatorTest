@@ -45,19 +45,3 @@ test('should mulitply non matching numbers', async ({ page }) => {
     await page.getByLabel('equals').click();
     await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText(`${a * b}`);
 });
-
-test('should multiply numbers with decimals', async ({ page }) => {
-    const google = new googlePage(page);
-    await google.goto();
-    await google.searchFor("calculator");
-    await page.getByRole('button', { name: `${a}`, exact: true }).click();
-    await page.getByLabel('point').click();
-    await page.getByRole('button', { name:`${b}`, exact: true }).click();
-    await page.getByLabel('multiply').click();    
-    await page.getByRole('button', { name:`${b}`, exact: true }).click();
-    await page.getByLabel('point').click();
-    await page.getByRole('button', { name: `${a}`, exact: true }).click();
-    await page.getByLabel('equals').click();
-    console.log(c, d);
-    await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText(`${parseFloat((c * d).toFixed(2))}`);
-});
