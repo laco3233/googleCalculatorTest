@@ -13,6 +13,11 @@ exports.googlePage = class googlePage {
     //Locators
     this.searchInput = page.locator('xpath=//*[@id="APjFqb"]');
     this.searchButton = page.getByLabel('Google Search').first();
+    this.plus = page.getByText('+', { exact: true });
+    this.subtract = page.getByLabel('minus');
+    this.multiply = page.getByLabel('multiply');
+    this.divide = page.getByLabel('divide');
+    this.equals = page.getByLabel('equals');
   }
 
   async goto() {

@@ -27,9 +27,9 @@ for (const n of num) {
         await google.goto();
         await google.searchFor("calculator");
         await page.getByRole('button', { name: `${n}`, exact: true }).click();
-        await page.getByText('+', { exact: true }).click();
+        await google.plus.click();
         await page.getByRole('button', { name: `${n}`, exact: true }).click();
-        await page.getByLabel('equals').click();
+        await google.equals.click();
         await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText(`${n + n}`);
         await page.close();
     });
@@ -41,9 +41,9 @@ for (const n of num) {
         await google.goto();
         await google.searchFor("calculator");
         await page.getByRole('button', { name: `${n}`, exact: true }).click();
-        await page.getByText('+', { exact: true }).click();
+        await google.plus.click();
         await page.getByRole('button', { name: '0', exact: true }).click();
-        await page.getByLabel('equals').click();
+        await google.equals.click();
         await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText(`${n}`);
         await page.close();
     });
@@ -54,9 +54,9 @@ test('should add non matching numbers', async ({ page }) => {
     await google.goto();
     await google.searchFor("calculator");
     await page.getByRole('button', { name: `${a}`, exact: true }).click();
-    await page.getByText('+', { exact: true }).click();
+    await google.plus.click();
     await page.getByRole('button', { name:`${b}`, exact: true }).click();
-    await page.getByLabel('equals').click();
+    await google.equals.click();
     await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText(`${a + b}`);
     await page.close();
 });
