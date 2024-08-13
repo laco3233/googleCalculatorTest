@@ -21,7 +21,7 @@ for (const n of button) {
         const google = new googlePage(page);
         await google.goto();
         await google.searchFor("calculator");
-        await page.getByRole('button', { name: `${n}`, exact: true }).click();
+        await google.clickButton(`${n}`);
         await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText(`${n}`);
         await page.close();
     });
@@ -32,7 +32,8 @@ test(`Should verify that . is displayed`, async ({ page }) => {
     const google = new googlePage(page);
     await google.goto();
     await google.searchFor("calculator");
-    await page.getByLabel('point').click();
+    await google.clickButton('point');
+   // await page.getByLabel('point').click();
     await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('.');
     await page.close();
 });
@@ -42,8 +43,8 @@ for (const n of button) {
         const google = new googlePage(page);
         await google.goto();
         await google.searchFor("calculator");
-        await page.getByRole('button', { name: `${n}`, exact: true }).click();
-        await page.getByLabel('clear entry').click();
+        await google.clickButton(`${n}`);
+        await google.clickButton('clear entry');
         await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('0');
         await page.close();
     });
@@ -54,7 +55,7 @@ test(`Should verify that ÷ is displayed`, async ({ page }) => {
     const google = new googlePage(page);
     await google.goto();
     await google.searchFor("calculator");
-    await google.divide.click();
+    await google.clickButton('divide');
     await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('0 ÷');
     await page.close();
 });

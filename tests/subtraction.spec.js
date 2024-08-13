@@ -26,10 +26,10 @@ for (const n of num) {
         const google = new googlePage(page);
         await google.goto();
         await google.searchFor("calculator");
-        await page.getByRole('button', { name: `${n}`, exact: true }).click();
-        await google.subtract.click();
-        await page.getByRole('button', { name: `${n}`, exact: true }).click();
-        await google.equals.click();
+        await google.clickButton(`${n}`);
+        await google.clickButton('minus');
+        await google.clickButton(`${n}`);
+        await google.clickButton('equals');
         await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText(`${n - n}`);
         await page.close();
     });
