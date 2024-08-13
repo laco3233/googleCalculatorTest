@@ -64,7 +64,7 @@ test(`Should verify that × is displayed`, async ({ page }) => {
     const google = new googlePage(page);
     await google.goto();
     await google.searchFor("calculator");
-    await google.multiply.click();
+    await google.clickButton('multiply');
     await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('0 ×');
     await page.close();
 });
@@ -73,7 +73,7 @@ test(`Should verify that - is displayed`, async ({ page }) => {
     const google = new googlePage(page);
     await google.goto();
     await google.searchFor("calculator");
-    await google.subtract.click();
+    await google.clickButton('minus');
     await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('-');
     await page.close();
 });
@@ -82,7 +82,7 @@ test(`Should verify that = does nothing without any other inputs`, async ({ page
     const google = new googlePage(page);
     await google.goto();
     await google.searchFor("calculator");
-    await google.equals.click();
+    await google.clickButton('equals');
     await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('0');
     await page.close();
 });
@@ -91,7 +91,7 @@ test(`Should verify that + is displayed`, async ({ page }) => {
     const google = new googlePage(page);
     await google.goto();
     await google.searchFor("calculator");
-    await google.plus.click();
+    await google.clickButton('plus');
     await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('0 +');
     await page.close();
 });
@@ -100,8 +100,8 @@ test(`Should verify that CE clears after pressing ÷ and displays 0`, async ({ p
     const google = new googlePage(page);
     await google.goto();
     await google.searchFor("calculator");
-    await google.divide.click();
-    await page.getByLabel('clear entry').click();
+    await google.clickButton('divide');
+    await google.clickButton('clear entry');
     await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('0');
     await page.close();
 });
@@ -110,8 +110,8 @@ test(`Should verify that CE clears after pressing × and displays 0`, async ({ p
     const google = new googlePage(page);
     await google.goto();
     await google.searchFor("calculator");
-    await google.multiply.click();
-    await page.getByLabel('clear entry').click();
+    await google.clickButton('multiply');
+    await google.clickButton('clear entry');
     await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('0');
     await page.close();
 });
@@ -120,8 +120,8 @@ test(`Should verify that CE clears after pressing - and displays 0`, async ({ pa
     const google = new googlePage(page);
     await google.goto();
     await google.searchFor("calculator");
-    await google.subtract.click();
-    await page.getByLabel('clear entry').click();
+    await google.clickButton('minus');
+    await google.clickButton('clear entry');
     await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('0');
     await page.close();
 });
@@ -130,8 +130,8 @@ test(`Should verify that CE clears after pressing + and displays 0`, async ({ pa
     const google = new googlePage(page);
     await google.goto();
     await google.searchFor("calculator");
-    await google.plus.click();
-    await page.getByLabel('clear entry').click();
+    await google.clickButton('plus');
+    await google.clickButton('clear entry');
     await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('0');
     await page.close();
 });
@@ -140,11 +140,11 @@ test('should verify that AC clears the answer', async ({ page }) => {
     const google = new googlePage(page);
     await google.goto();
     await google.searchFor("calculator");
-    await page.getByRole('button', { name: '9', exact: true }).click();    
-    await google.plus.click();   
-    await page.getByRole('button', { name: '9', exact: true }).click();
-    await google.equals.click();    
-    await page.getByLabel('all clear').click();
+    await google.clickButton('9');
+    await google.clickButton('plus');
+    await google.clickButton('9');
+    await google.clickButton('equals');
+    await google.clickButton('all clear');
     await expect(page.locator('xpath=//*[@id="cwos"]').first()).toHaveText('0');
     await page.close();
 });
