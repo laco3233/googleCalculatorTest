@@ -69,6 +69,10 @@ test('should divide non matching numbers', async ({ page }) => {
     await google.clickButton('divide');
     await google.clickButton(`${b}`);
     await google.clickButton('equals');
-    await expect(page.locator('xpath=//*[@id="cwos"]').first()).toContainText(`${parseFloat(Math.abs(a / b).toFixed(11))}`);
+    // Get the calculator output
+    const result = await page.locator('xpath=//*[@id="cwos"]').first().innerText();
+    // Calculate expected result as Google would display (up to 15 significant digits, no Math.abs)
+    const expected = (a / b).toString();
+    expect(result).toContain(expected);
     await page.close();
 });
